@@ -1,0 +1,68 @@
+<html>
+<head>
+	<title>Image Citation Tool 2</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="stylesheet" type="text/css" href="css/application.css">
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/openseadragon.js"></script>
+	<script type="text/javascript" src="js/openseadragon-guides.js"></script>
+	<script type="text/javascript" src="js/selection.js"></script>
+	<script type="text/javascript" src="js/selectionoverlay.js"></script>
+	<script type="text/javascript" src="js/selectionrect.js"></script>
+</head>
+<body>
+
+	<header>
+		Image Citation Tool <span id="app_header_versionInfo">v.2.0</span>
+	</header>
+
+	<div class="urnFieldDiv">
+		<label for="image_urnBox">URN</label>
+		<input id="image_urnBox" type="text" size="60" value=""/>
+		<button id="image_changeUrn">Change Image</button>
+	</div>
+
+	<div class="onoffswitch">
+		<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="browse_onoffswitch" checked=false
+		/>
+		<label class="onoffswitch-label" for="browse_onoffswitch">
+			<span class="onoffswitch-inner"></span>
+			<span class="onoffswitch-switch"></span>
+		</label>
+	</div>
+
+	<div id="serverConfigs" class="configDiv">
+		<label for="image_serverUrlBox">Server Path</label>
+		<input id="image_serverUrlBox" type="text" size="50" value=""/>
+		<label for="image_serverSuffixBox">Suffix</label>
+		<input id="image_serverSuffixBox" type="text" size="20" value=""/>
+	</div>
+
+	<div id="localConfigs" class="configDiv" >
+		<label for="image_localPathBox">Local Path</label>
+		<input id="image_localPathBox" type="text" size="20" value=""/>
+	</div>
+
+	<div id="image_sidebar" class="app_sidebarDiv">
+
+		<h2>Saved URNs</h2>
+
+		<ul id="image_urnList">
+		</ul>
+
+	</div>
+
+	<div>
+		<p>Draw rectangles to define regions-of-interest. Toggle selection-mode by typing “c”.</p>
+	</div>
+
+
+	<div id="image_imageContainer">
+
+	</div>
+
+
+
+
+	<script type="text/javascript" src="js/ict2.js"></script>
+	</html>
