@@ -99,6 +99,24 @@ function initOpenSeadragon() {
 			//addRoiOverlay()
 		}
 	});
+
+
+	// Openseadragon does not have a ready() function, so here we are…
+	setTimeout(function(){
+			loadDefaultROI(imgUrn)
+	},1000);
+
+}
+
+function loadDefaultROI(imgUrn){
+	if (imgUrn.split("@").length > 1){
+		var newRoi = imgUrn.split("@")[1];
+		var newGroup = getGroup(roiArray.length+1);
+		var roiObj = {index: roiArray.length, roi: newRoi, mappedUrn: imgUrn, group: newGroup.toString()};
+		roiArray.push(roiObj);
+		addRoiOverlay(roiObj);
+		addRoiListing(roiObj);
+	}
 }
 
 function createROI(rect){
