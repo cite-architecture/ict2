@@ -66,6 +66,11 @@ function initOpenSeadragon() {
 		immediateRender: true
 	});
 
+	viewer.addHandler('full-screen', function (viewer) {
+    console.log('fullscreen');
+		refreshRois();
+	})
+
 
 	// Guides plugin
 	viewer.guides({
@@ -140,6 +145,7 @@ function createROI(rect){
 }
 
 function addRoiListing(roiObj){
+		console.log("addRoiListing")
 		// image_urnList
 		var idForListing = idForMappedUrn(roiObj.index);
 		var idForRect = idForMappedROI(roiObj.index);
@@ -185,8 +191,21 @@ function deleteRoi(c){
 		addRoiOverlay(roiArray[i]);
 		addRoiListing(roiArray[i]);
 	}
+}
 
-
+function refreshRois(){
+	var tempArray = []
+	for (i = 0; i < roiArray.length; i++){
+		tempArray.push(roiArray[i]);
+	}
+	clearJsRoiArray()
+	for (i = 0; i < tempArray.length; i++){
+	 var newGroup = getGroup(i+1);
+	 var roiObj = {index: i, roi: tempArray[i].roi, mappedUrn: tempArray[i].mappedUrn, group: newGroup.toString()};
+		roiArray.push(roiObj);
+		addRoiOverlay(roiArray[i]);
+		addRoiListing(roiArray[i]);
+	}
 }
 
 
