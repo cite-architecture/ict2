@@ -18,7 +18,7 @@ var useLocal = true
 
 
 var imgUrn = "urn:cite2:hmt:vaimg.v1:VA012RN_0013@0.208,0.2087,0.086,0.0225"
-var defaultUrn = "not_a_urn"
+var defaultUrn = "urn:cite2:hmt:vaimg.v1:VA012RN_0013"
 
 var roiArray = []
 
@@ -58,7 +58,7 @@ function initOpenSeadragon() {
 	viewer = OpenSeadragon({
 		id: 'image_imageContainer',
 		prefixUrl: 'css/images/',
-		crossOriginPolicy: 'Anonymous',
+		crossOriginPolicy: "Anonymous",
 		defaultZoomLevel: 1,
 		tileSources: getTileSources(imgUrn),
 		// tileSources: 'http://www.homermultitext.org/iipsrv?DeepZoom=/project/homer/pyramidal/VenA/VA012RN_0013.tif.dzi',
@@ -339,8 +339,10 @@ function getTileSources(imgUrn){
 	if (useLocal){
 		var localDir = plainUrn.split(":")[0] + "_" + plainUrn.split(":")[1] + "_" + plainUrn.split(":")[2] + "_" + plainUrn.split(":")[3] + "_/"
 		ts = usePath + localDir + imgId + useSuffix
+		console.log(ts)
 	} else {
 		ts = usePath + imgId + useSuffix
+		console.log(ts)
 	}
 	return ts
 }
