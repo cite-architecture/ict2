@@ -12,7 +12,7 @@ So if `urn:cite2:hmt:vaimg.v1:VA012RN_0013` represents an entire image of Volio 
 ## Quickstart
 
 - Clone or download this repository.
-- Open `ICT2.html` in a browser.
+- Open `index.html` in a browser.
 - Experiment with the following Image URNs (the ones represented in the sample data:
 
 ~~~
