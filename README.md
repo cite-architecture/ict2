@@ -24,6 +24,16 @@ So if `urn:cite2:hmt:vaimg.v1:VA012RN_0013` represents an entire image of Volio 
   urn:cite2:hmt:vaimg.v1:VA012VN_0514
 ~~~
 
+## Passing a URN as an HTTP Request parameter
+
+…you can.
+
+E.g. <http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:vaimg.v1:VA012RND_0892>
+
+If you pass a URN as a parameter-value, and the URN already has a region-of-interest identified by a subreference, ICT2 will pre-load that ROI:
+
+<http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:vaimg.v1:VA012RND_0892@0.5888,0.3201,0.02874,0.03513>
+
 ## Notes
 
 The web-app can work with local image files or remote files. `v.1.1.0` includes a small library of demonstration files in `image_archive`. As of 6/16/2017, the online repository which ICT2 has as its default is not offering the 'Access Control Allow Origin' header necessary for ICT2 to retrieve its data. For some reason, Safari will let the remote service work, but only when running ICT2 directly from the filesystem.
@@ -40,4 +50,3 @@ CITE2 URNs are part of the [CITE Architecture](http://cite-architecture.github.i
 - `vaimg` = collection-ID
 - `v1` = version of collection
 - `VA012RN_0013` = object-ID
-
