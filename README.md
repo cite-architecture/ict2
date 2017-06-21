@@ -1,6 +1,6 @@
 # ict2
 
-version 0.1.0
+version 0.2.1
 
 An Image Citation tool for working with CITE2 URNs.
 
@@ -53,3 +53,9 @@ CITE2 URNs are part of the [CITE Architecture](http://cite-architecture.github.i
 - `vaimg` = collection-ID
 - `v1` = version of collection
 - `VA012RN_0013` = object-ID
+
+# ICT2 Version History
+
+- 0.2.1 fixed bug where changing the local path had no effect
+- 0.2.0 added preview window for working with very small ROIs
+- 0.1.0 first working version
