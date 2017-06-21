@@ -2,13 +2,25 @@
 
 var viewer = null
 
-var defaultServerPath = "http://www.homermultitext.org/iipsrv?DeepZoom=/project/homer/pyramidal/VenA/"
-var defaultServerSuffix = ".tif.dzi"
+var defaultServiceUrl = "http://www.homermultitext.org/iipsrv?"
+// "http://www.homermultitext.org/iipsrv?DeepZoom=/project/homer/pyramidal/VenA/"
+var defaultServiceZoomService = "DeepZoom="
+var defaultServicePath = "/project/homer/pyramidal/VenA/"
+var defaultServiceSuffix = ".tif"
+var defaultServiceZoomPostfix = ".dzi"
+var defaultThumbWidth = 250;
+
+
 var defaultLocalpath = "image_archive/"
 
 
-var serverPath = defaultServerPath
-var serverSuffix = defaultServerSuffix
+var serviceUrl = defaultServiceUrl
+var servicePath= defaultServicePath
+var serviceUrlAndPath = serviceUrl + defaultServiceZoomService + servicePath
+var serviceSuffix = defaultServiceSuffix
+var servicePostfix = serviceSuffix + defaultServiceZoomPostfix
+
+
 var localPath = defaultLocalpath
 var localSuffix = ".dzi"
 var usePath = localPath
@@ -23,6 +35,61 @@ var defaultUrn = "urn:cite2:hmt:vaimg.v1:VA012RN_0013"
 var roiArray = []
 
 //var tsrc = getTileSource
+
+
+function ict2_drawPreview(osr){
+	  var newRoi = rectToRoi(osr)
+		if (useLocal){
+			getLocalPreview(newRoi)
+		} else {
+			getRemotePreview(newRoi)
+		}
+}
+
+function getLocalPreview(newRoi){
+					console.log(newRoi);
+
+					var rL = newRoi.split(',')[0];
+					var rT = newRoi.split(',')[1];
+					var rW = newRoi.split(',')[2];
+					var rH = newRoi.split(',')[3];
+
+					console.log(rL + ", " + rT + ", " + rW + ", " + rH);
+
+	var plainUrn = imgUrn.split("@")[0];
+	var imgId = plainUrn.split(":")[4];
+	var localDir = plainUrn.split(":")[0] + "_" + plainUrn.split(":")[1] + "_" + plainUrn.split(":")[2] + "_" + plainUrn.split(":")[3] + "_/"
+	var path = localPath + localDir + imgId + ".jpg";
+	var cvs = document.createElement("canvas");
+	cvs.setAttribute("crossOrigin","Anonymous");
+	var ctx = cvs.getContext("2d");
+	var offScreenImg = document.createElement("img");
+	offScreenImg.setAttribute("crossOrigin","Anonymous")
+	offScreenImg.setAttribute("src",path);
+	console.log(offScreenImg.getAttribute("src"));
+	offScreenImg.onload = function(){
+		console.log("loaded");
+		console.log(offScreenImg.width);
+		cvs.width = (offScreenImg.width * rW);
+		console.log(cvs.width);
+		cvs.height = (offScreenImg.height * rH);
+		console.log(cvs.height);
+				// draw it once
+		ctx.drawImage(offScreenImg,(0-(offScreenImg.width * rL)),(0-(offScreenImg.height*rT)));
+		var s = cvs.toDataURL("image/png");
+		$("#image_preview").attr("src",s);
+
+	};
+// image_archive/urn_cite2_hmt_vaimg.v1_/VA012RN_0013.jpg
+}
+
+function getRemotePreview(roi){
+	var plainUrn = imgUrn.split("@")[0];
+	var imgId = plainUrn.split(":")[4];
+	var u = serviceUrl + "OBJ=IIP,1.0&FIF=" + servicePath + imgId + serviceSuffix;
+	u += "&RGN=" + roi + "&wID=" + defaultThumbWidth + "&CVT=JPEG";
+	$("#image_preview").attr("src",u);
+}
 
 
 
@@ -47,7 +114,7 @@ jQuery(function($){
 
 });
 
-
+/* Initiatlize OpenSeadragon viewer with guides, selection, and pre-load any urn */
 function initOpenSeadragon() {
 
 		if (viewer != null){
@@ -67,7 +134,6 @@ function initOpenSeadragon() {
 	});
 
 	viewer.addHandler('full-screen', function (viewer) {
-    console.log('fullscreen');
 		refreshRois();
 	})
 
@@ -113,6 +179,9 @@ function initOpenSeadragon() {
 
 }
 
+
+
+
 function loadDefaultROI(imgUrn){
 	if (imgUrn.split("@").length > 1){
 		var newRoi = imgUrn.split("@")[1];
@@ -124,8 +193,20 @@ function loadDefaultROI(imgUrn){
 	}
 }
 
-function createROI(rect){
 
+
+
+function createROI(rect){
+	var newRoi = rectToRoi(rect);
+	var newUrn = imgUrn + "@" + newRoi;
+	var newGroup = getGroup(roiArray.length+1);
+	var roiObj = {index: roiArray.length, roi: newRoi, mappedUrn: newUrn, group: newGroup.toString()};
+	roiArray.push(roiObj);
+	addRoiOverlay(roiObj);
+	addRoiListing(roiObj);
+}
+
+function rectToRoi(rect){
 	var normH = viewer.world.getItemAt(0).getBounds().height;
 	var normW = viewer.world.getItemAt(0).getBounds().width;
 	roiRect = viewer.viewport.imageToViewportRectangle(rect);
@@ -134,18 +215,12 @@ function createROI(rect){
 	var rw = roiRect.width / normW;
 	var rh = roiRect.height / normH;
 	var newRoi = rl.toPrecision(4) + "," + rt.toPrecision(4) + "," + rw.toPrecision(4) + "," + rh.toPrecision(4);
-	var newUrn = imgUrn + "@" + newRoi;
-	var newGroup = getGroup(roiArray.length+1);
-	var roiObj = {index: roiArray.length, roi: newRoi, mappedUrn: newUrn, group: newGroup.toString()};
-	roiArray.push(roiObj);
-	addRoiOverlay(roiObj);
-	addRoiListing(roiObj);
-
-
+	return newRoi;
 }
 
+
+
 function addRoiListing(roiObj){
-		console.log("addRoiListing")
 		// image_urnList
 		var idForListing = idForMappedUrn(roiObj.index);
 		var idForRect = idForMappedROI(roiObj.index);
@@ -169,17 +244,17 @@ function addRoiListing(roiObj){
 		$("a#delete"+idForListing).on("click",function(){
 				var tid = $(this).prop("id")
 				var i = tid.replace("deleteimage_mappedUrn_","")
-				console.log("Delete: " + i)
 				deleteRoi(parseInt(i))
 		});
 }
 
+
+
+
 function deleteRoi(c){
 	var tempArray = []
 	for (i = 0; i < roiArray.length; i++){
-		console.log("c = " + c + "; i = " + i)
 		if (i != c){
-			console.log(roiArray[i]);
 			tempArray.push(roiArray[i]);
 		}
 	}
@@ -192,6 +267,8 @@ function deleteRoi(c){
 		addRoiListing(roiArray[i]);
 	}
 }
+
+
 
 function refreshRois(){
 	var tempArray = []
@@ -209,11 +286,16 @@ function refreshRois(){
 }
 
 
+
+
 //get request parameter
 function get(name){
 	if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
 	return decodeURIComponent(name[1]);
 }
+
+
+
 
 function addRoiOverlay(roiObj){
 	var normH = viewer.world.getItemAt(0).getBounds().height;
@@ -247,6 +329,9 @@ function addRoiOverlay(roiObj){
 	});
 }
 
+
+
+
 function removeAllHighlights(){
 	 	for (i = 0; i < roiArray.length; i++){
 			var liId = idForMappedUrn(i)
@@ -256,16 +341,21 @@ function removeAllHighlights(){
 		}
 }
 
+
+
+
 function clearJsRoiArray() {
 	for (i = 0; i < roiArray.length; i++){
 		var tid = "image_mappedROI_" + i
 		viewer.removeOverlay(tid)
 		//$("a#" + tid).remove()
 	}
-	roiArray = []
-	$("#image_urnList").empty()
+	roiArray = [];
+	$("#image_urnList").empty();
+	$("#image_preview").attr("src","");
 
 }
+
 
 
 
@@ -274,44 +364,57 @@ function idForMappedUrn(i) {
 	return s
 }
 
+
+
 function idForMappedROI(i) {
 	var s = "image_mappedROI_" + (i)
 	return s
 }
+
+
+
 
 function roiToUrnId(id) {
 	var s = id.replace("image_mappedROI_","image_mappedUrn_")
 	return s
 }
 
+
+
 function urnToRoiId(id) {
 	var s = id.replace("image_mappedUrn_","image_mappedROI_")
 	return s
 }
 
+
+
+
 function getGroup(i){
-
 	var colorArray = ["#f23568", "#6d38ff", "#38ffd7", "#fff238", "#661641", "#275fb3", "#24a669", "#a67b24", "#ff38a2", "#194973", "#35f268", "#7f441c", "#801c79", "#2a8ebf", "#216616", "#d97330", "#da32e6", "#196d73", "#bdff38", "#bf3e2a", "#3d1973", "#30cdd9", "#858c1f", "#661616"	]
-
 	var limit = colorArray.length
 	rv = i % limit
-
 	return rv
-
 }
+
+
+
 
 function reloadImage(){
-	clearJsRoiArray()
-	initOpenSeadragon()
+	clearJsRoiArray();
+	initOpenSeadragon();
 }
+
+
+
 
 function setUpUI() {
 
 	$("div#serverConfigs").hide()
 	$("div#localConfigs").show()
 	$("#browse_onoffswitch").prop("checked",false)
-	$("input#image_serverUrlBox").prop("value",serverPath)
-	$("input#image_serverSuffixBox").prop("value",serverSuffix)
+	$("input#image_serverUrlBox").prop("value",serviceUrl)
+	$("input#image_serverUrlPathBox").prop("value",servicePath)
+	$("input#image_serverSuffixBox").prop("value",serviceSuffix)
 	$("input#image_localPathBox").prop("value",localPath)
 
 	$("button#image_changeUrn").on("click", function(){
@@ -321,10 +424,17 @@ function setUpUI() {
 	});
 
 	$("input#image_serverUrlBox").change(function(){
-			serverPath = $(this).prop("value")
+			serviceUrl = $(this).prop("value");
+      serviceUrlAndPath = serviceUrl + defaultServiceZoomService + servicePath
+	});
+	$("input#image_serverUrlPathBox").change(function(){
+			servicePath = $(this).prop("value");
+      serviceUrlAndPath = serviceUrl + defaultServiceZoomService + servicePath
 	});
 	$("input#image_serverSuffixBox").change(function(){
-			serverSuffix = $(this).prop("value")
+			serviceSuffix = $(this).prop("value");
+			servicePostfix = serviceSuffix + defaultServiceZoomPostfix;
+		  useSuffix = servicePostfix
 	});
 	$("input#image_localPathBox").change(function(){
 			localPath = $(this).prop("value")
@@ -335,8 +445,8 @@ function setUpUI() {
 	$("#browse_onoffswitch").on("click", function(){
 			if ( $(this).prop("checked") ){
 				useLocal = false
-				usePath = serverPath
-				useSuffix = serverSuffix
+				usePath = serviceUrlAndPath
+				useSuffix = servicePostfix
 				$("div#serverConfigs").show()
 				$("div#localConfigs").hide()
 				reloadImage()
@@ -351,6 +461,8 @@ function setUpUI() {
 	} );
 }
 
+
+
 function getTileSources(imgUrn){
 	var plainUrn = imgUrn.split("@")[0]
 	var imgId = plainUrn.split(":")[4]
@@ -358,10 +470,8 @@ function getTileSources(imgUrn){
 	if (useLocal){
 		var localDir = plainUrn.split(":")[0] + "_" + plainUrn.split(":")[1] + "_" + plainUrn.split(":")[2] + "_" + plainUrn.split(":")[3] + "_/"
 		ts = usePath + localDir + imgId + useSuffix
-		console.log(ts)
 	} else {
 		ts = usePath + imgId + useSuffix
-		console.log(ts)
 	}
 	return ts
 }

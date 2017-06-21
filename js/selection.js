@@ -99,6 +99,7 @@
             new $.MouseTracker({
                 element:     this.borders[i],
                 dragHandler: onBorderDrag.bind(this, i),
+		            dragEndHandler:     $.delegate( this, onBorderDragEnd ),
             });
 
             corners[i]                  = $.makeNeutralElement('div');
@@ -111,6 +112,7 @@
             new $.MouseTracker({
                 element:     corners[i],
                 dragHandler: onBorderDrag.bind(this, i + 0.5),
+		            dragEndHandler:     $.delegate( this, onBorderDragEnd ),
             });
 
             this.borders[i].appendChild(handle);
@@ -336,7 +338,7 @@
             }
             this.rectDone = false;
         } else {
-			
+
             var oldRect;
             if (this.restrictToImage) {
                 oldRect = this.rect.clone();
@@ -368,6 +370,14 @@
         // Eable move after new selection is done
         this.viewer.setMouseNavEnabled(true);
         this.rectDone = true;
+        var result = this.rect.normalize();
+        if (this.returnPixelCoordinates) {
+            var real = this.viewer.viewport.viewportToImageRectangle(result);
+            real = $.SelectionRect.fromRect(real).round();
+            real.rotation = result.rotation;
+            result = real;
+        }
+				ict2_drawPreview(result)
     }
 
     function onClick() {
@@ -389,7 +399,26 @@
 
     function onInsideDragEnd() {
         $.removeClass(this.element, 'dragging');
+        var result = this.rect.normalize();
+        if (this.returnPixelCoordinates) {
+            var real = this.viewer.viewport.viewportToImageRectangle(result);
+            real = $.SelectionRect.fromRect(real).round();
+            real.rotation = result.rotation;
+            result = real;
+        }
+				ict2_drawPreview(result)
     }
+
+		function onBorderDragEnd() {
+        var result = this.rect.normalize();
+        if (this.returnPixelCoordinates) {
+            var real = this.viewer.viewport.viewportToImageRectangle(result);
+            real = $.SelectionRect.fromRect(real).round();
+            real.rotation = result.rotation;
+            result = real;
+        }
+				ict2_drawPreview(result)
+		}
 
     function onBorderDrag(border, e) {
         var delta = e.delta;
