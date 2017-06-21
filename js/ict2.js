@@ -12,6 +12,7 @@ var defaultThumbWidth = 250;
 
 
 var defaultLocalpath = "image_archive/"
+//var defaultLocalpath = "venA_archive/"
 
 
 var serviceUrl = defaultServiceUrl
@@ -29,8 +30,8 @@ var useSuffix = localSuffix
 var useLocal = true
 
 
-var imgUrn = "urn:cite2:hmt:vaimg.v1:VA012RN_0013@0.208,0.2087,0.086,0.0225"
-var defaultUrn = "urn:cite2:hmt:vaimg.v1:VA012RN_0013"
+var imgUrn = "urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.208,0.2087,0.086,0.0225"
+var defaultUrn = "urn:cite2:hmt:vaimg.2017a:VA012RN_0013"
 
 var roiArray = []
 
@@ -438,6 +439,8 @@ function setUpUI() {
 	});
 	$("input#image_localPathBox").change(function(){
 			localPath = $(this).prop("value")
+			usePath = localPath;
+			console.log("Changed to: " + localPath);
 	});
 
 	$("input#image_urnBox").prop("value",imgUrn)
