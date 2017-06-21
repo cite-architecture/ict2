@@ -6,7 +6,7 @@ An Image Citation tool for working with CITE2 URNs.
 
 The single-page webapp allows a user to retrieve an image via CITE2 URN, and by drawing rectangles on it, create versions of the image’s URN extended by a region-of-interest.
 
-So if `urn:cite2:hmt:vaimg.v1:VA012RN_0013` represents an entire image of Volio 12-recto of the Venetus A manuscript, `urn:cite2:hmt:vaimg.v1:VA012RN_0013@0.2066,0.2084,0.1672,0.02437` identifies only the rectangle bounding the title “ΙΛΙΑΔΟΣ ΑΛΦΑ” on that image.
+So if `urn:cite2:hmt:vaimg.v1:VA012RN_0013` represents an entire image of folio 12 recto of the Venetus A manuscript, `urn:cite2:hmt:vaimg.v1:VA012RN_0013@0.2066,0.2084,0.1672,0.02437` identifies only the rectangle bounding the title “ΙΛΙΑΔΟΣ ΑΛΦΑ” on that image.
 
 ## Quickest Start
 
