@@ -384,6 +384,7 @@ li.image_roiGroupSelected {
 		background-color: rgba(249,255,0,.5);
 }
 
+a.image_roiGroup_0 {   outline: 3px solid red; }
 a.image_roiGroup_1 {   outline: 3px solid #f23568; }
 a.image_roiGroup_2 {   outline: 3px solid #6d38ff; }
 a.image_roiGroup_3 {   outline: 3px solid #38ffd7; }
@@ -409,6 +410,7 @@ a.image_roiGroup_9 {   outline: 3px solid #ff38a2; }
  a.image_roiGroup_23 { outline: 3px solid #858c1f; }
  a.image_roiGroup_24 { outline: 3px solid #661616; }
 
+ li.image_roiGroup_0:before  {color: red; content: "▶︎"; padding-right:0.5em; }
  li.image_roiGroup_1:before  {color: #f23568; content: "▶︎"; padding-right:0.5em; }
  li.image_roiGroup_2:before  {color: #6d38ff; content: "▶︎"; padding-right:0.5em; }
  li.image_roiGroup_3:before  {color: #38ffd7; content: "▶︎"; padding-right:0.5em; }

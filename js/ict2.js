@@ -48,14 +48,12 @@ function ict2_drawPreview(osr){
 }
 
 function getLocalPreview(newRoi){
-					console.log(newRoi);
 
 					var rL = newRoi.split(',')[0];
 					var rT = newRoi.split(',')[1];
 					var rW = newRoi.split(',')[2];
 					var rH = newRoi.split(',')[3];
 
-					console.log(rL + ", " + rT + ", " + rW + ", " + rH);
 
 	var plainUrn = imgUrn.split("@")[0];
 	var imgId = plainUrn.split(":")[4];
@@ -67,14 +65,9 @@ function getLocalPreview(newRoi){
 	var offScreenImg = document.createElement("img");
 	offScreenImg.setAttribute("crossOrigin","Anonymous")
 	offScreenImg.setAttribute("src",path);
-	console.log(offScreenImg.getAttribute("src"));
 	offScreenImg.onload = function(){
-		console.log("loaded");
-		console.log(offScreenImg.width);
 		cvs.width = (offScreenImg.width * rW);
-		console.log(cvs.width);
 		cvs.height = (offScreenImg.height * rH);
-		console.log(cvs.height);
 				// draw it once
 		ctx.drawImage(offScreenImg,(0-(offScreenImg.width * rL)),(0-(offScreenImg.height*rT)));
 		var s = cvs.toDataURL("image/png");
@@ -261,7 +254,7 @@ function deleteRoi(c){
 	}
 	clearJsRoiArray()
 	for (i = 0; i < tempArray.length; i++){
-	 var newGroup = getGroup(i+1);
+	 var newGroup = getGroup(i);
 	 var roiObj = {index: i, roi: tempArray[i].roi, mappedUrn: tempArray[i].mappedUrn, group: newGroup.toString()};
 		roiArray.push(roiObj);
 		addRoiOverlay(roiArray[i]);
@@ -391,10 +384,12 @@ function urnToRoiId(id) {
 
 
 function getGroup(i){
-	var colorArray = ["#f23568", "#6d38ff", "#38ffd7", "#fff238", "#661641", "#275fb3", "#24a669", "#a67b24", "#ff38a2", "#194973", "#35f268", "#7f441c", "#801c79", "#2a8ebf", "#216616", "#d97330", "#da32e6", "#196d73", "#bdff38", "#bf3e2a", "#3d1973", "#30cdd9", "#858c1f", "#661616"	]
+	var colorArray = ["#f23568", "#6d38ff", "#38ffd7", "#fff238", "#661641", "#275fb3", "#24a669", "#a67b24", "#ff38a2", "#194973", "#35f268", "#7f441c", "#801c79", "#2a8ebf", "#216616", "#d97330", "#da32e6", "#196d73", "#bdff38", "#bf3e2a", "#3d1973", "#30cdd9", "#858c1f", "#661616"	];
+	//var colorArray = ["#f23568", "#6d38ff", "#38ffd7", "#fff238"];
 	var limit = colorArray.length
-	rv = i % limit
-	return rv
+	//var limit = 4;
+	rv = i % limit;
+	return rv;
 }
 
 
@@ -440,7 +435,6 @@ function setUpUI() {
 	$("input#image_localPathBox").change(function(){
 			localPath = $(this).prop("value")
 			usePath = localPath;
-			console.log("Changed to: " + localPath);
 	});
 
 	$("input#image_urnBox").prop("value",imgUrn)
