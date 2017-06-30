@@ -11,8 +11,8 @@ var defaultServiceZoomPostfix = ".dzi"
 var defaultThumbWidth = 250;
 
 
+//var defaultLocalpath = "image_archive/"
 var defaultLocalpath = "image_archive/"
-//var defaultLocalpath = "venA_archive/"
 
 
 var serviceUrl = defaultServiceUrl
@@ -126,6 +126,7 @@ function initOpenSeadragon() {
 		minZoomImageRatio: 0.1, // of viewer size
 		immediateRender: true
 	});
+
 
 	viewer.addHandler('full-screen', function (viewer) {
 		refreshRois();
@@ -426,6 +427,7 @@ function setUpUI() {
 	$("input#image_serverUrlPathBox").change(function(){
 			servicePath = $(this).prop("value");
       serviceUrlAndPath = serviceUrl + defaultServiceZoomService + servicePath
+			usePath = serviceUrlAndPath;
 	});
 	$("input#image_serverSuffixBox").change(function(){
 			serviceSuffix = $(this).prop("value");
