@@ -5,7 +5,7 @@ var viewer = null
 // "http://www.homermultitext.org/iipsrv?DeepZoom=/project/homer/pyramidal/VenA/"
 var defaultServiceUrl = "http://www.homermultitext.org/iipsrv?"
 var defaultServiceZoomService = "DeepZoom="
-var defaultServicePath = "/project/homer/pyramidal/VenA/"
+var defaultServicePath = "/project/homer/pyramidal/deepzoom/"
 var defaultServiceSuffix = ".tif"
 var defaultServiceZoomPostfix = ".dzi"
 var defaultLocalpath = "image_archive/"
@@ -19,6 +19,7 @@ var defaultThumbWidth = 250;
 var serviceUrl = defaultServiceUrl
 var servicePath= defaultServicePath
 var serviceUrlAndPath = serviceUrl + defaultServiceZoomService + servicePath
+var imagePath= "";
 var serviceSuffix = defaultServiceSuffix
 var servicePostfix = serviceSuffix + defaultServiceZoomPostfix
 
@@ -67,8 +68,9 @@ function getLocalPreview(newRoi){
 
 	var plainUrn = imgUrn.split("@")[0];
 	var imgId = plainUrn.split(":")[4];
-	var localDir = plainUrn.split(":")[0] + "_" + plainUrn.split(":")[1] + "_" + plainUrn.split(":")[2] + "_" + plainUrn.split(":")[3] + "_/"
-	var path = localPath + localDir + imgId + ".jpg";
+	//var localDir = plainUrn.split(":")[0] + "_" + plainUrn.split(":")[1] + "_" + plainUrn.split(":")[2] + "_" + plainUrn.split(":")[3] + "_/"
+	var tempImagePath = getImagePathFromUrn(plainUrn);
+	var path = localPath + tempImagePath  + imgId + ".jpg";
 	var cvs = document.createElement("canvas");
 	cvs.setAttribute("crossOrigin","Anonymous");
 	var ctx = cvs.getContext("2d");
@@ -90,7 +92,9 @@ function getLocalPreview(newRoi){
 function getRemotePreview(roi){
 	var plainUrn = imgUrn.split("@")[0];
 	var imgId = plainUrn.split(":")[4];
-	var u = serviceUrl + "OBJ=IIP,1.0&FIF=" + servicePath + imgId + serviceSuffix;
+	var tempImagePath = getImagePathFromUrn(plainUrn);
+	// here
+	var u = serviceUrl + "OBJ=IIP,1.0&FIF=" + servicePath + tempImagePath + imgId + serviceSuffix;
 	u += "&RGN=" + roi + "&wID=" + defaultThumbWidth + "&CVT=JPEG";
 	$("#image_preview").attr("src",u);
 }
@@ -424,7 +428,7 @@ function setUpUI() {
 	$("#browse_onoffswitch").prop("checked",false)
 	$("input#image_serverUrlBox").prop("value",serviceUrl)
 	$("input#image_serverUrlPathBox").prop("value",servicePath)
-	$("input#image_serverSuffixBox").prop("value",serviceSuffix)
+	//$("input#image_serverSuffixBox").prop("value",serviceSuffix)
 	$("input#image_localPathBox").prop("value",localPath)
 
 	$("button#image_changeUrn").on("click", function(){
@@ -473,17 +477,26 @@ function setUpUI() {
 	} );
 }
 
-
+function getImagePathFromUrn(urn){
+	var ns  = urn.split(":")[2];
+	var collectionAndVersion = urn.split(":")[3];
+	var collection = collectionAndVersion.split(".")[0];
+	var version = collectionAndVersion.split(".")[1];
+	var tempPath = ns + "/" + collection + "/" + version + "/";
+	return tempPath
+}
 
 function getTileSources(imgUrn){
 	var plainUrn = imgUrn.split("@")[0]
 	var imgId = plainUrn.split(":")[4]
+	imagePath = getImagePathFromUrn(plainUrn);
+	console.log("imagePath is now " + imagePath);
 	var ts = ""
 	if (useLocal){
-		var localDir = plainUrn.split(":")[0] + "_" + plainUrn.split(":")[1] + "_" + plainUrn.split(":")[2] + "_" + plainUrn.split(":")[3] + "_/"
-		ts = usePath + localDir + imgId + useSuffix
+		//var localDir = plainUrn.split(":")[0] + "_" + plainUrn.split(":")[1] + "_" + plainUrn.split(":")[2] + "_" + plainUrn.split(":")[3] + "_/"
+		ts = usePath + imagePath + imgId + useSuffix
 	} else {
-		ts = usePath + imgId + useSuffix
+		ts = usePath + imagePath + imgId + useSuffix
 	}
 	return ts
 }
