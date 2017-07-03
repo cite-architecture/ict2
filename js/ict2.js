@@ -2,17 +2,18 @@
 
 var viewer = null
 
-var defaultServiceUrl = "http://www.homermultitext.org/iipsrv?"
 // "http://www.homermultitext.org/iipsrv?DeepZoom=/project/homer/pyramidal/VenA/"
+var defaultServiceUrl = "http://www.homermultitext.org/iipsrv?"
 var defaultServiceZoomService = "DeepZoom="
 var defaultServicePath = "/project/homer/pyramidal/VenA/"
 var defaultServiceSuffix = ".tif"
 var defaultServiceZoomPostfix = ".dzi"
+var defaultLocalpath = "image_archive/"
 var defaultThumbWidth = 250;
 
 
 //var defaultLocalpath = "image_archive/"
-var defaultLocalpath = "image_archive/"
+//var defaultLocalpath = "image_archive/"
 
 
 var serviceUrl = defaultServiceUrl
@@ -40,6 +41,15 @@ var roiArray = []
 
 function ict2_drawPreview(osr){
 	  var newRoi = rectToRoi(osr)
+		if (useLocal){
+			getLocalPreview(newRoi)
+		} else {
+			getRemotePreview(newRoi)
+		}
+}
+
+function ict2_drawPreviewFromUrn(urn){
+		var newRoi = urn.split("@")[1];
 		if (useLocal){
 			getLocalPreview(newRoi)
 		} else {
@@ -232,7 +242,9 @@ function addRoiListing(roiObj){
 				removeAllHighlights();
 				$(this).addClass("image_roiGroupSelected");
 				var rectId = urnToRoiId(this.id);
-				$("a#"+rectId).addClass("image_roiGroupSelected");
+					// !!!! Update preview here!
+				ict2_drawPreviewFromUrn(  $("#" + rectId ).data("urn"))	;
+				$("#"+rectId).addClass("image_roiGroupSelected");
 			}
 		});
 
@@ -318,6 +330,7 @@ function addRoiOverlay(roiObj){
 		} else {
 			removeAllHighlights();
 			$(this).addClass("image_roiGroupSelected");
+			ict2_drawPreviewFromUrn( $(this).data("urn") );
 			var liId = roiToUrnId(this.id);
 			$("li#"+liId).addClass("image_roiGroupSelected");
 		}
