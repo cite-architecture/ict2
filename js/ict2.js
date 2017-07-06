@@ -193,6 +193,7 @@ function initOpenSeadragon() {
 	});
 
 
+
 	viewer.addHandler('full-screen', function (viewer) {
 		refreshRois();
 	})
@@ -234,7 +235,7 @@ function initOpenSeadragon() {
 
 	// Openseadragon does not have a ready() function, so here we are…
 	setTimeout(function(){
-			loadDefaultROI(imgUrn)
+			loadDefaultROI(imgUrn);
 	},1000);
 
 }
@@ -243,8 +244,10 @@ function initOpenSeadragon() {
 
 
 function loadDefaultROI(imgUrn){
-	if (roiArray.length > 0){
-		roiArray.forEach(function(i){
+	tempArray = roiArray;
+	roiArray = []
+	if (tempArray.length > 0){
+		tempArray.forEach(function(i){
 			var newRoi = i;
 			var newGroup = getGroup(roiArray.length+1);
 			var roiObj = {
@@ -339,7 +342,7 @@ function deleteRoi(c){
 	}
 	clearJsRoiArray()
 	for (i = 0; i < tempArray.length; i++){
-	 var newGroup = getGroup(i);
+	 var newGroup = getGroup(i+1);
 	 var roiObj = {index: i, roi: tempArray[i].roi, mappedUrn: tempArray[i].mappedUrn, group: newGroup.toString()};
 		roiArray.push(roiObj);
 		addRoiOverlay(roiArray[i]);
