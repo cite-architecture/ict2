@@ -39,6 +39,28 @@ var roiArray = []
 //var tsrc = getTileSource
 
 /*
+
+http://www.homermultitext.org/ict2/index.html?
+file:///Users/cblackwell/Dropbox/CITE/scala/index.html?
+
+urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2518,0.2893,0.2640,0.09705&
+
+urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.3274,0.3347,0.2640,0.09705&
+
+urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.4471,0.4081,0.2640,0.09705&
+
+urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.4855,0.4484,0.2640,0.09705&
+
+urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2799,0.4514,0.1334,0.08056%20&
+
+urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2360,0.4256,0.1149,0.08157
+
+
+file:///Users/cblackwell/Dropbox/CITE/scala/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.1541,0.2522,0.3589,0.03928&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.1760,0.3708,0.3589,0.03928
+
+
+file:///Users/cblackwell/Dropbox/CITE/scala/ict2/index.html?urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2518,0.2893,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.3274,0.3347,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.4471,0.4081,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.4855,0.4484,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2799,0.4514,0.1334,0.08056%20&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2360,0.4256,0.1149,0.08157
+
 file:///Users/cblackwell/Dropbox/CITE/scala/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2518,0.2893,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.3274,0.3347,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4471,0.4081,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4855,0.4484,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2799,0.4514,0.1334,0.08056 &urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2360,0.4256,0.1149,0.08157
 
 file:///Users/cblackwell/Dropbox/CITE/scala/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2518,0.2893,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.3274,0.3347,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4044,0.3720,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4471,0.4081,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4855,0.4484,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2799,0.4514,0.1334,0.08056 &urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2360,0.4256,0.1149,0.08157
@@ -305,9 +327,10 @@ function addRoiListing(roiObj){
 		var idForListing = idForMappedUrn(roiObj.index);
 		var idForRect = idForMappedROI(roiObj.index);
 		var groupClass = "image_roiGroup_" + roiObj.group;
-		var deleteLink = "<a class='deleteLink' id='delete" + idForListing + "' data-index='" + roiObj.index + "'></a>";
+		var deleteLink = "<a class='deleteLink' title='delete urn' id='delete" + idForListing + "' data-index='" + roiObj.index + "'></a>";
+		var copyLink = "<a class='copyLink' title='copy urn' id='copyUrn" + idForListing + "'></a>";
 		var mappedUrnSpan = "<li class='" + groupClass + "' id='" + idForListing + "'>";
-		mappedUrnSpan += deleteLink + roiObj.mappedUrn + "</li>";
+		mappedUrnSpan += deleteLink + copyLink + roiObj.mappedUrn + "</li>";
 		$("#image_urnList").append(mappedUrnSpan);
 		// <a class="image_deleteUrn">✖︎</a>
 		$("li#" + idForListing ).on("click",function(){
@@ -321,6 +344,33 @@ function addRoiListing(roiObj){
 				ict2_drawPreviewFromUrn(  $("#" + rectId ).data("urn"))	;
 				$("#"+rectId).addClass("image_roiGroupSelected");
 			}
+		});
+
+		$("a#copyUrn" + idForListing).on("click", function(){
+			var copyText = $("#" + idForListing).text();
+			//$("#" + idForListing).createTextRange();
+			var textArea = document.createElement("textarea");
+		  textArea.style.position = 'fixed';
+		  textArea.style.top = 0;
+		  textArea.style.left = 0;
+		  textArea.style.width = '2em';
+		  textArea.style.height = '2em';
+		  textArea.style.padding = 0;
+		  textArea.style.border = 'none';
+		  textArea.style.outline = 'none';
+		  textArea.style.boxShadow = 'none';
+		  textArea.style.background = 'transparent';
+		  textArea.value = copyText;
+		  document.body.appendChild(textArea);
+		  textArea.select();
+		  try {
+			    var successful = document.execCommand('copy');
+			    var msg = successful ? 'successful' : 'unsuccessful';
+			    console.log('Copying text command was ' + msg);
+		  } catch (err) {
+			    console.log('Oops, unable to copy');
+		  }
+			  document.body.removeChild(textArea);
 		});
 
 		$("a#delete"+idForListing).on("click",function(){
@@ -522,6 +572,7 @@ function setUpUI() {
 			imgUrn = newUrn
 			reloadImage();
 	});
+
 
 	$("input#image_serverUrlBox").change(function(){
 			serviceUrl = $(this).prop("value");

@@ -366,9 +366,39 @@ div.configDiv {
 
 /* Group Colors */
 
+a.copyLink:before {
+		content: "+";
+		color: green;
+		border: 1px solid green;
+		padding-left: 3px;
+		padding-right: 3px;
+}
+
+a.copyLink {
+	margin-right: 2px;
+	margin-left: 2px;
+}
+
 a.deleteLink:before{
-	content: "[x]";
+	content: "x";
 	color: red;
+	border: 1px solid red;
+		padding-left: 3px;
+		padding-right: 3px;
+}
+
+
+a.copyLink:hover {
+	background-color: rgba(0,255,0,0.3);
+}
+
+a.deleteLink:hover {
+	background-color: rgba(255,0,0,0.3);
+}
+
+a.copyLink:hover, a.deleteLink:hover {
+	text-decoration: none;
+	cursor: pointer;
 }
 
 a.deleteLink {
