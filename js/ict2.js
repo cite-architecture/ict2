@@ -1,4 +1,4 @@
-/* Defaults and Globals */
+/* efaults and Globals */
 
 var viewer = null
 
@@ -38,6 +38,10 @@ var defaultUrn = "urn:cite2:hmt:vaimg.2017a:VA012RN_0013"
 var roiArray = []
 
 //var tsrc = getTileSource
+
+/*
+file:///Users/cblackwell/Dropbox/CITE/scala/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2518,0.2893,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.3274,0.3347,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4044,0.3720,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4471,0.4081,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4855,0.4484,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2799,0.4514,0.1334,0.08056 &urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2360,0.4256,0.1149,0.08157
+*/
 
 
 function ict2_drawPreview(osr){
@@ -192,6 +196,23 @@ function initOpenSeadragon() {
 
 
 function loadDefaultROI(imgUrn){
+	console.log(roiArray.length)
+	if (roiArray.length > 0){
+		roiArray.forEach(function(i){
+			var newRoi = i;
+			var newGroup = getGroup(roiArray.length+1);
+			var roiObj = {
+				index: roiArray.length,
+				roi: newRoi,
+				mappedUrn: imgUrn,
+				group: newGroup.toString()};
+			roiArray.push(roiObj);
+			addRoiOverlay(roiObj);
+			addRoiListing(roiObj);
+		});
+	}
+
+	/*
 	if (imgUrn.split("@").length > 1){
 		var newRoi = imgUrn.split("@")[1];
 		var newGroup = getGroup(roiArray.length+1);
@@ -200,6 +221,7 @@ function loadDefaultROI(imgUrn){
 		addRoiOverlay(roiObj);
 		addRoiListing(roiObj);
 	}
+	*/
 }
 
 
@@ -302,7 +324,23 @@ function refreshRois(){
 //get request parameter
 function get(name){
 	if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
-	return decodeURIComponent(name[1]);
+
+	var query = window.location.search.substring(1);
+	if (query != undefined){
+	  var vars = query.split("&");
+		vars.forEach(function(v){
+				console.log(v.split("=")[1].split("@")[1].split("%")[0]);
+				roiArray.push(v.split("=")[1].split("@")[1].split("%")[0]);
+		});
+		console.log(vars);
+	}
+	if (name != undefined) {
+		return decodeURIComponent(name[1]);
+		console.log(decodeURIComponent(name[1].split("@")[0]))
+	} else {
+		return undefined;
+	}
+
 }
 
 
