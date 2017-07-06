@@ -41,6 +41,11 @@ var roiArray = []
 
 /*
 file:///Users/cblackwell/Dropbox/CITE/scala/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2518,0.2893,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.3274,0.3347,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4044,0.3720,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4471,0.4081,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4855,0.4484,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2799,0.4514,0.1334,0.08056 &urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2360,0.4256,0.1149,0.08157
+
+file:///Users/cblackwell/Dropbox/CITE/scala/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2518,0.2893,0.2640,0.09705
+
+file:///Users/cblackwell/Dropbox/CITE/scala/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013
+
 */
 
 
@@ -329,7 +334,7 @@ function get(name){
 	if (query != undefined){
 	  var vars = query.split("&");
 		vars.forEach(function(v){
-				if (v.split("=")[1].split("@").size < 2){
+				if (v.split("=")[1].split("@").length > 1){
 					roiArray.push(v.split("=")[1].split("@")[1].split("%")[0]);
 				}
 		});
