@@ -329,8 +329,9 @@ function get(name){
 	if (query != undefined){
 	  var vars = query.split("&");
 		vars.forEach(function(v){
-				console.log(v.split("=")[1].split("@")[1].split("%")[0]);
-				roiArray.push(v.split("=")[1].split("@")[1].split("%")[0]);
+				if (v.split("=")[1].split("@").size < 2){
+					roiArray.push(v.split("=")[1].split("@")[1].split("%")[0]);
+				}
 		});
 		console.log(vars);
 	}
