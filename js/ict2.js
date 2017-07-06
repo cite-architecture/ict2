@@ -24,13 +24,12 @@ var serviceSuffix = defaultServiceSuffix
 var servicePostfix = serviceSuffix + defaultServiceZoomPostfix
 
 
-var localPath = defaultLocalpath
-var localSuffix = ".dzi"
-var usePath = localPath
-var useSuffix = localSuffix
+var localPath = defaultLocalpath;
+var localSuffix = ".dzi";
+var usePath = localPath;
+var useSuffix = localSuffix;
 
-var useLocal = true
-
+var useLocal = false;
 
 var imgUrn = "urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.208,0.2087,0.086,0.0225"
 var defaultUrn = "urn:cite2:hmt:vaimg.2017a:VA012RN_0013"
@@ -49,6 +48,45 @@ file:///Users/cblackwell/Dropbox/CITE/scala/ict2/index.html?urn=urn:cite2:hmt:va
 file:///Users/cblackwell/Dropbox/CITE/scala/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013
 
 file:///Users/cblackwell/Dropbox/CITE/scala/ict2/index.html
+
+
+http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2518,0.2893,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.3274,0.3347,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4471,0.4081,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4855,0.4484,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2799,0.4514,0.1334,0.08056 &urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2360,0.4256,0.1149,0.08157
+
+http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2518,0.2893,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.3274,0.3347,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4044,0.3720,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4471,0.4081,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4855,0.4484,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2799,0.4514,0.1334,0.08056 &urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2360,0.4256,0.1149,0.08157
+
+http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2518,0.2893,0.2640,0.09705
+
+http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013
+
+http://www.homermultitext.org/ict2/index.html
+
+urn:cite2:hmt:vaimg.2017a:VA012VN_0514
+
+
+http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.2518,0.2893,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.3274,0.3347,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4471,0.4081,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4855,0.4484,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.2799,0.4514,0.1334,0.08056 &urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.2360,0.4256,0.1149,0.08157
+
+http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.2518,0.2893,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.3274,0.3347,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4044,0.3720,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4471,0.4081,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4855,0.4484,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.2799,0.4514,0.1334,0.08056 &urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.2360,0.4256,0.1149,0.08157
+
+http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.2518,0.2893,0.2640,0.09705
+
+http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514
+
+http://www.homermultitext.org/ict2/index.html
+
+http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2518,0.2893,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.3274,0.3347,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.4471,0.4081,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.4855,0.4484,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2799,0.4514,0.1334,0.08056 &urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2360,0.4256,0.1149,0.08157
+
+http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2518,0.2893,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.3274,0.3347,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.4044,0.3720,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.4471,0.4081,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.4855,0.4484,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2799,0.4514,0.1334,0.08056 &urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2360,0.4256,0.1149,0.08157
+
+http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2518,0.2893,0.2640,0.09705
+
+http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano
+
+http://www.homermultitext.org/ict2/index.html
+
+file:///Users/cblackwell/Dropbox/CITE/scala/ict2/index.html?urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2518,0.2893,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.3274,0.3347,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.4471,0.4081,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.4855,0.4484,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2799,0.4514,0.1334,0.08056%20&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2360,0.4256,0.1149,0.08157
+
+
+file:///Users/cblackwell/Dropbox/CITE/scala/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4965,0.2199,0.3211,0.02047&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4978,0.2423,0.2905,0.01646&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4978,0.2609,0.3277,0.01936&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4959,0.2793,0.3277,0.01936&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4993,0.2992,0.3277,0.01936&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4993,0.3206,0.3137,0.01936&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4972,0.3380,0.3357,0.01992&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4993,0.3555,0.3436,0.01992&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.5011,0.3739,0.3609,0.01936&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.5006,0.3918,0.3449,0.02241&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.5039,0.4107,0.3336,0.02241&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.5059,0.4317,0.3489,0.02241
 
 */
 
@@ -205,7 +243,6 @@ function initOpenSeadragon() {
 
 
 function loadDefaultROI(imgUrn){
-	console.log(roiArray.length)
 	if (roiArray.length > 0){
 		roiArray.forEach(function(i){
 			var newRoi = i;
@@ -342,11 +379,9 @@ function get(name){
 					roiArray.push(v.split("=")[1].split("@")[1].split("%")[0]);
 				}
 		});
-		console.log(vars);
 	}
 	if (name != undefined) {
 		return decodeURIComponent(name[1]);
-		console.log(decodeURIComponent(name[1].split("@")[0]))
 	} else {
 		return undefined;
 	}
@@ -473,7 +508,7 @@ function setUpUI() {
 
 	$("div#serverConfigs").hide()
 	$("div#localConfigs").show()
-	$("#browse_onoffswitch").prop("checked",false)
+	$("#browse_onoffswitch").prop("checked",true)
 	$("input#image_serverUrlBox").prop("value",serviceUrl)
 	$("input#image_serverUrlPathBox").prop("value",servicePath)
 	//$("input#image_serverSuffixBox").prop("value",serviceSuffix)
@@ -505,6 +540,21 @@ function setUpUI() {
 	});
 
 	$("input#image_urnBox").prop("value",imgUrn)
+
+  // Make sure we're starting correctly
+			if ( $("#browse_onoffswitch").prop("checked") ){
+				useLocal = false
+				usePath = serviceUrlAndPath
+				useSuffix = servicePostfix
+				$("div#serverConfigs").show()
+				$("div#localConfigs").hide()
+			} else {
+				useLocal = true
+				usePath = localPath
+				useSuffix = localSuffix
+				$("div#serverConfigs").hide()
+				$("div#localConfigs").show()
+			}
 
 	$("#browse_onoffswitch").on("click", function(){
 			if ( $(this).prop("checked") ){
@@ -538,7 +588,6 @@ function getTileSources(imgUrn){
 	var plainUrn = imgUrn.split("@")[0]
 	var imgId = plainUrn.split(":")[4]
 	imagePath = getImagePathFromUrn(plainUrn);
-	console.log("imagePath is now " + imagePath);
 	var ts = ""
 	if (useLocal){
 		//var localDir = plainUrn.split(":")[0] + "_" + plainUrn.split(":")[1] + "_" + plainUrn.split(":")[2] + "_" + plainUrn.split(":")[3] + "_/"
