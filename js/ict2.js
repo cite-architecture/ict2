@@ -270,12 +270,14 @@ function loadDefaultROI(imgUrn){
 	roiArray = []
 	if (tempArray.length > 0){
 		tempArray.forEach(function(i){
+			console.log(i);
 			var newRoi = i;
 			var newGroup = getGroup(roiArray.length+1);
+			var newUrn = imgUrn.split("@")[0] + "@" + i;
 			var roiObj = {
 				index: roiArray.length,
 				roi: newRoi,
-				mappedUrn: imgUrn,
+				mappedUrn: newUrn,
 				group: newGroup.toString()};
 			roiArray.push(roiObj);
 			addRoiOverlay(roiObj);
