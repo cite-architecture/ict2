@@ -26,12 +26,18 @@
 div.app_sidebarDiv{
 		font-size: 80%;
 		float: right;
-		max-width: 33%;
-		background-color: #fff;
-		padding: 15px;
-		padding-top: 3px;
-		padding-left: 35px;
-		min-height: 200px;
+		position: absolute;
+		right: 20;
+		background-color: rgba(0, 0, 0, 0);
+		width: 300%;
+		padding: 5px;
+
+}
+
+#sideBarItself{
+	box-shadow: 1px 1px 1px 1px rgba(125, 125, 125, 0.5);
+	min-height: 300px;
+
 }
 
 div.app_sidebarDiv h2 {
@@ -129,22 +135,8 @@ img.object_imgThumb, img#image_previewImg {
 	max-height: 200px;
 }
 
-div#image_imageContainer {
-	max-width: 65%;
-	width: auto;
-	height: 600px;
-}
-
 div#image_imageContainer.fullpage {
 	max-width: 100%;
-}
-
-
-div#image_sidebar.app_sidebarDiv{
-	border: 1px solid silver;
-	width: 300px;
-	max-width: 30%;
-	margin-top: 55px;
 }
 
 div#image_sidebar ul {
