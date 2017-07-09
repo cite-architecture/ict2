@@ -2,80 +2,88 @@
 <head>
 	<title>Image Citation Tool 2</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<link rel="stylesheet" type="text/css" href="css/application.css">
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="js/openseadragon.js"></script>
 	<script type="text/javascript" src="js/openseadragon-guides.js"></script>
 	<script type="text/javascript" src="js/selection.js"></script>
 	<script type="text/javascript" src="js/selectionoverlay.js"></script>
 	<script type="text/javascript" src="js/selectionrect.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="css/application.css">
 </head>
 <body>
 
-	<header>
-		Image Citation Tool 2 <span id="app_header_versionInfo">v.1.0.0</span>
-	</header>
+	<!-- Top row box. Contains the search field-->
+	<div class="row">
+		<div class="col-xs-12">
+			<header>
+				Image Citation Tool 2 <span id="app_header_versionInfo">v.1.0.0</span>
+			</header>
+			<label for="image_urnBox">URN</label>
+			<input id="image_urnBox" type="text" size="60" value=""/>
+			<button class="btn btn-primary" id="image_changeUrn">Change Image</button>
 
-	<div class="urnFieldDiv">
-		<label for="image_urnBox">URN</label>
-		<input id="image_urnBox" type="text" size="60" value=""/>
-		<button id="image_changeUrn">Change Image</button>
+			<input type="button" data-toggle="collapse" data-target="#settingsPanel" class="btn btn-default btn-xs" value="Show Settings">
+		</div>
+
+		<div class="col-xs-12">
+			<div class="panel-body collapse well" id="settingsPanel">
+				<div class="onoffswitch">
+					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="browse_onoffswitch" checked=true/>
+					<label class="onoffswitch-label" for="browse_onoffswitch">
+						<span class="onoffswitch-inner"></span>
+						<span class="onoffswitch-switch"></span>
+					</label>
+				</div>
+				<div id="serverConfigs" class="configDiv">
+					<label for="image_serverUrlBox">Remove Service</label>
+					<input id="image_serverUrlBox" type="text" size="30" value=""/>
+					<label for="image_serverUrlPathBox">Path</label>
+					<input id="image_serverUrlPathBox" type="text" size="30" value=""/>
+					<!--
+					<label for="image_serverSuffixBox">Suffix</label>
+					<input id="image_serverSuffixBox" type="text" size="20" value=""/>
+				-->
+				<label for="image_localPathBox">Local Path</label>
+					<input id="image_localPathBox" type="text" size="20" value=""/>
+				</div>
+			</div>
+		</div>
 	</div>
 
-	<div class="onoffswitch">
-		<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="browse_onoffswitch" checked=true
-		/>
-		<label class="onoffswitch-label" for="browse_onoffswitch">
-			<span class="onoffswitch-inner"></span>
-			<span class="onoffswitch-switch"></span>
-		</label>
+	<!-- This row contains the explanation about the image viewer -->
+	<div class="row">
+		<div class="col-xs-12">
+				<p>Draw rectangles to define regions-of-interest. Toggle selection-mode by typing “c”.</p>
+		</div>
 	</div>
 
-	<div id="serverConfigs" class="configDiv">
-		<label for="image_serverUrlBox">Remove Service</label>
-		<input id="image_serverUrlBox" type="text" size="30" value=""/>
-		<label for="image_serverUrlPathBox">Path</label>
-		<input id="image_serverUrlPathBox" type="text" size="30" value=""/>
-		<!--
-		<label for="image_serverSuffixBox">Suffix</label>
-		<input id="image_serverSuffixBox" type="text" size="20" value=""/>
-	-->
+	<!-- This row contains the actual image viewer and preview panel -->
+	<div class="row">
+		<div class="col-xs-11">
+				<div id="image_imageContainer"></div>
+		</div>
+
+		<div class="col-xs-1">
+			<div id="image_sidebar" class="app_sidebarDiv">
+				<div class="panel panel-success" id="sideBarItself">
+					<div class="panel-heading">Preview</div>
+					<div class="panel-body">
+						<img id="image_preview" src=""/>
+						<h2>Saved URNs</h2>
+						<ul id="image_urnList"></ul>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-
-	<div id="localConfigs" class="configDiv" >
-		<label for="image_localPathBox">Local Path</label>
-		<input id="image_localPathBox" type="text" size="20" value=""/>
 	</div>
-
-	<div id="image_sidebar" class="app_sidebarDiv">
-
-		<h2>Preview</h2>
-		<img id="image_preview" src=""/>
-
-		<h2>Saved URNs</h2>
-
-		<ul id="image_urnList">
-		</ul>
-
-	</div>
-
-	<div>
-		<p>Draw rectangles to define regions-of-interest. Toggle selection-mode by typing “c”.</p>
-	</div>
-
-
-	<div id="image_imageContainer">
-
-	</div>
-
 	<footer>
-
 		<p>
-		CITE/CTS is ©2002–2017 Neel Smith and Christopher Blackwell. This tool for working with images cited via CITE2 URNs is ©2017 by Christopher Blackwell. ICT2 is available for use, modification, and distribution under the terms of the <a href="https://opensource.org/licenses/gpl-3.0.html">GPL 3.0</a> license. ICT2 is based on <a href="http://openseadragon.github.io">Openseadragon</a>.
+		CITE/CTS is ©2002–2017 Neel Smith and Christopher Blackwell. This tool for working with images cited via CITE2 URNs is ©2017 by Christopher Blackwell with additions by Mees Gelein. ICT2 is available for use, modification, and distribution under the terms of the <a href="https://opensource.org/licenses/gpl-3.0.html">GPL 3.0</a> license. ICT2 is based on <a href="http://openseadragon.github.io">Openseadragon</a>.
 		</p>
-
 	</footer>
-
-
 	<script type="text/javascript" src="js/ict2.js"></script>
 	</html>
