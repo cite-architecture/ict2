@@ -36,82 +36,6 @@ var defaultUrn = "urn:cite2:hmt:vaimg.2017a:VA012RN_0013"
 
 var roiArray = []
 
-//var tsrc = getTileSource
-
-/*
-
-http://www.homermultitext.org/ict2/index.html?
-file:///Users/cblackwell/Dropbox/CITE/scala/index.html?
-
-urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2518,0.2893,0.2640,0.09705&
-
-urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.3274,0.3347,0.2640,0.09705&
-
-urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.4471,0.4081,0.2640,0.09705&
-
-urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.4855,0.4484,0.2640,0.09705&
-
-urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2799,0.4514,0.1334,0.08056%20&
-
-urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2360,0.4256,0.1149,0.08157
-
-
-file:///Users/cblackwell/Dropbox/CITE/scala/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.1541,0.2522,0.3589,0.03928&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.1760,0.3708,0.3589,0.03928
-
-
-file:///Users/cblackwell/Dropbox/CITE/scala/ict2/index.html?urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2518,0.2893,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.3274,0.3347,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.4471,0.4081,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.4855,0.4484,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2799,0.4514,0.1334,0.08056%20&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2360,0.4256,0.1149,0.08157
-
-file:///Users/cblackwell/Dropbox/CITE/scala/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2518,0.2893,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.3274,0.3347,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4471,0.4081,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4855,0.4484,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2799,0.4514,0.1334,0.08056 &urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2360,0.4256,0.1149,0.08157
-
-file:///Users/cblackwell/Dropbox/CITE/scala/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2518,0.2893,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.3274,0.3347,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4044,0.3720,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4471,0.4081,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4855,0.4484,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2799,0.4514,0.1334,0.08056 &urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2360,0.4256,0.1149,0.08157
-
-file:///Users/cblackwell/Dropbox/CITE/scala/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2518,0.2893,0.2640,0.09705
-
-file:///Users/cblackwell/Dropbox/CITE/scala/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013
-
-file:///Users/cblackwell/Dropbox/CITE/scala/ict2/index.html
-
-
-http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2518,0.2893,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.3274,0.3347,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4471,0.4081,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4855,0.4484,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2799,0.4514,0.1334,0.08056 &urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2360,0.4256,0.1149,0.08157
-
-http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2518,0.2893,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.3274,0.3347,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4044,0.3720,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4471,0.4081,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.4855,0.4484,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2799,0.4514,0.1334,0.08056 &urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2360,0.4256,0.1149,0.08157
-
-http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.2518,0.2893,0.2640,0.09705
-
-http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012RN_0013
-
-http://www.homermultitext.org/ict2/index.html
-
-urn:cite2:hmt:vaimg.2017a:VA012VN_0514
-
-
-http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.2518,0.2893,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.3274,0.3347,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4471,0.4081,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4855,0.4484,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.2799,0.4514,0.1334,0.08056 &urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.2360,0.4256,0.1149,0.08157
-
-http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.2518,0.2893,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.3274,0.3347,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4044,0.3720,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4471,0.4081,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4855,0.4484,0.2640,0.09705&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.2799,0.4514,0.1334,0.08056 &urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.2360,0.4256,0.1149,0.08157
-
-http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.2518,0.2893,0.2640,0.09705
-
-http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514
-
-http://www.homermultitext.org/ict2/index.html
-
-http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2518,0.2893,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.3274,0.3347,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.4471,0.4081,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.4855,0.4484,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2799,0.4514,0.1334,0.08056 &urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2360,0.4256,0.1149,0.08157
-
-http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2518,0.2893,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.3274,0.3347,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.4044,0.3720,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.4471,0.4081,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.4855,0.4484,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2799,0.4514,0.1334,0.08056 &urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2360,0.4256,0.1149,0.08157
-
-http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2518,0.2893,0.2640,0.09705
-
-http://www.homermultitext.org/ict2/index.html?urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano
-
-http://www.homermultitext.org/ict2/index.html
-
-file:///Users/cblackwell/Dropbox/CITE/scala/ict2/index.html?urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2518,0.2893,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.3274,0.3347,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.4471,0.4081,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.4855,0.4484,0.2640,0.09705&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2799,0.4514,0.1334,0.08056%20&urn=urn:cite2:hmt:hmtpap.2017a:Pap114_pano@0.2360,0.4256,0.1149,0.08157
-
-
-file:///Users/cblackwell/Dropbox/CITE/scala/ict2/index.html?urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4965,0.2199,0.3211,0.02047&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4978,0.2423,0.2905,0.01646&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4978,0.2609,0.3277,0.01936&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4959,0.2793,0.3277,0.01936&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4993,0.2992,0.3277,0.01936&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4993,0.3206,0.3137,0.01936&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4972,0.3380,0.3357,0.01992&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.4993,0.3555,0.3436,0.01992&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.5011,0.3739,0.3609,0.01936&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.5006,0.3918,0.3449,0.02241&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.5039,0.4107,0.3336,0.02241&urn=urn:cite2:hmt:vaimg.2017a:VA012VN_0514@0.5059,0.4317,0.3489,0.02241
-
-*/
-
 
 function ict2_drawPreview(osr){
 	  var newRoi = rectToRoi(osr)
@@ -405,7 +329,7 @@ function deleteRoi(c){
 
 
 function refreshRois(){
-	var tempArray = []
+	var tempArray = [];
 	for (i = 0; i < roiArray.length; i++){
 		tempArray.push(roiArray[i]);
 	}
@@ -430,9 +354,11 @@ function get(name){
 	if (query != undefined){
 	  var vars = query.split("&");
 		vars.forEach(function(v){
+			if(v.length > 0){
 				if (v.split("=")[1].split("@").length > 1){
 					roiArray.push(v.split("=")[1].split("@")[1].split("%")[0]);
 				}
+			}
 		});
 	}
 	if (name != undefined) {
@@ -506,30 +432,20 @@ function clearJsRoiArray() {
 
 }
 
-
-
-
 function idForMappedUrn(i) {
 	var s = "image_mappedUrn_" + (i)
 	return s
 }
-
-
 
 function idForMappedROI(i) {
 	var s = "image_mappedROI_" + (i)
 	return s
 }
 
-
-
-
 function roiToUrnId(id) {
 	var s = id.replace("image_mappedROI_","image_mappedUrn_")
 	return s
 }
-
-
 
 function urnToRoiId(id) {
 	var s = id.replace("image_mappedUrn_","image_mappedROI_")
