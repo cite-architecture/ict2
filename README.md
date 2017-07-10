@@ -1,6 +1,6 @@
 # ict2
 
-version 0.2.1
+version 1.0.1
 
 An Image Citation tool for working with CITE2 URNs.
 
@@ -56,6 +56,8 @@ CITE2 URNs are part of the [CITE Architecture](http://cite-architecture.github.i
 
 # ICT2 Version History
 
+- 1.0.1 Updated GUI by Mees Gelein; fixed bug when list of urn-parameters ends in `&`
+- 1.0.0 Added copying of saved ROIs.
 - 0.2.1 fixed bug where changing the local path had no effect
 - 0.2.0 added preview window for working with very small ROIs
 - 0.1.0 first working version
