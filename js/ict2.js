@@ -122,7 +122,7 @@ jQuery(function($){
 
 	initOpenSeadragon()
 
-
+  $('#sideBarItself').drags();
 });
 
 /* Initiatlize OpenSeadragon viewer with guides, selection, and pre-load any urn */
