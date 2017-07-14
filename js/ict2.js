@@ -36,6 +36,12 @@ var defaultUrn = "urn:cite2:hmt:vaimg.2017a:VA012RN_0013"
 
 var roiArray = []
 
+/*
+Toggles the sidebar button show/hide value
+*/
+function toggleSidebar(){
+  $('#sidebarToggle').val(($('#sidebarToggle').val() == 'Hide') ? 'Show' : 'Hide');
+}
 
 function ict2_drawPreview(osr){
 	  var newRoi = rectToRoi(osr)
@@ -116,7 +122,7 @@ jQuery(function($){
 
 	initOpenSeadragon()
 
-
+  $('#sideBarItself').drags();
 });
 
 /* Initiatlize OpenSeadragon viewer with guides, selection, and pre-load any urn */
