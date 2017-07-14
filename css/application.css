@@ -34,6 +34,10 @@ div.app_sidebarDiv{
 
 }
 
+div.col-xs-12	{
+	margin-top: 5px;
+}
+
 #sideBarItself{
 	box-shadow: 1px 1px 1px 1px rgba(125, 125, 125, 0.5);
 }

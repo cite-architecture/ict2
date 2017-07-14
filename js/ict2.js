@@ -61,6 +61,37 @@ function ict2_drawPreviewFromUrn(urn){
 		}
 }
 
+function updateShareUrl(){
+			console.log("updating url");
+			var thisUrl = window.location.href.split("?")[0];
+			var theseUrns = "";
+			var shareUrl = "";
+			console.log(thisUrl);
+			if (imgUrn == "") {
+					console.log("empty urn");
+			} else {
+				  console.log(imgUrn);
+					if (roiArray.length > 0){
+						roiArray.forEach( function(r){
+							if (theseUrns == ""){
+								theseUrns += "?";
+							} else {
+								theseUrns += "&";
+							}
+							console.log("roi: " + r.roi);
+							theseUrns += "urn=" + imgUrn + "@" + r.roi;
+						});
+					} else {
+						console.log("empty roi");
+						theseUrns += "?urn=" + imgUrn;
+					}
+			}
+			shareUrl = thisUrl + theseUrns;
+			console.log(shareUrl);
+			$("a#ict_shareUrl").attr("href", shareUrl);
+			$("a#ict_shareUrl").text("Link to Current State")
+}
+
 function getLocalPreview(newRoi){
 
 					var rL = newRoi.split(',')[0];
@@ -116,6 +147,7 @@ jQuery(function($){
 	} else {
 		imgUrn = paramUrn;
 	}
+	updateShareUrl();
 
 	setUpUI()
 
@@ -188,7 +220,7 @@ function initOpenSeadragon() {
 	// Openseadragon does not have a ready() function, so here we are…
 	setTimeout(function(){
 			loadDefaultROI(imgUrn);
-	},1000);
+	},2000);
 
 }
 
@@ -213,6 +245,7 @@ function loadDefaultROI(imgUrn){
 			addRoiOverlay(roiObj);
 			addRoiListing(roiObj);
 		});
+		updateShareUrl();
 	}
 
 	/*
@@ -238,6 +271,7 @@ function createROI(rect){
 	roiArray.push(roiObj);
 	addRoiOverlay(roiObj);
 	addRoiListing(roiObj);
+	updateShareUrl();
 }
 
 function rectToRoi(rect){
@@ -330,6 +364,7 @@ function deleteRoi(c){
 		addRoiOverlay(roiArray[i]);
 		addRoiListing(roiArray[i]);
 	}
+	updateShareUrl();
 }
 
 
