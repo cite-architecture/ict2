@@ -53,7 +53,7 @@ function ict2_drawPreview(osr){
 }
 
 function ict2_drawPreviewFromUrn(urn){
-		var newRoi = urn.split("@")[1];
+		var newRoi = urn.split("@")[1].trim();
 		if (useLocal){
 			getLocalPreview(newRoi)
 		} else {
@@ -230,6 +230,14 @@ function initOpenSeadragon() {
 function loadDefaultROI(imgUrn){
 	tempArray = roiArray;
 	roiArray = []
+
+  //check if the value of imgUrn has a ROI already included
+  if(imgUrn.indexOf('@') > -1){
+    var includedROI = imgUrn.split('@')[1];
+    //if there was an ROI included, add it to the saved URNS
+    tempArray.push(includedROI);
+  }
+
 	if (tempArray.length > 0){
 		tempArray.forEach(function(i){
 			console.log(i);
@@ -529,7 +537,7 @@ function setUpUI() {
 	$("button#image_changeUrn").on("click", function(){
 			var newUrn = $("input#image_urnBox").prop("value").trim()
 			imgUrn = newUrn
-			reloadImage();
+      reloadImage();
 	});
 
 
