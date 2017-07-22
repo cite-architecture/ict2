@@ -43,6 +43,9 @@ function toggleSidebar(){
   $('#sidebarToggle').val(($('#sidebarToggle').val() == 'Hide') ? 'Show' : 'Hide');
 }
 
+/**
+ * Draws a preview. Does not seem to be used anymore. DEPRECATED?
+ */
 function ict2_drawPreview(osr){
 	  var newRoi = rectToRoi(osr)
 		if (useLocal){
@@ -52,6 +55,11 @@ function ict2_drawPreview(osr){
 		}
 }
 
+/**
+ * Distributes the drawing of the preview image to the right function
+ * depending on local or remote setting
+ * @param  {string} urn the URN we want to draw a preview of
+ */
 function ict2_drawPreviewFromUrn(urn){
 		var newRoi = urn.split("@")[1].trim();
 		if (useLocal){
@@ -61,6 +69,10 @@ function ict2_drawPreviewFromUrn(urn){
 		}
 }
 
+/**
+ * Updates the link the 'Share' button links to.
+ * @return {[type]} [description]
+ */
 function updateShareUrl(){
 			console.log("updating url");
 			var thisUrl = window.location.href.split("?")[0];
@@ -92,6 +104,10 @@ function updateShareUrl(){
 			$("a#ict_shareUrl").text("Link to Current State")
 }
 
+/**
+ * Gets the local preview using the provided ROI parameter
+ * @param  {string} newRoi the ROI of the image
+ */
 function getLocalPreview(newRoi){
 
 					var rL = newRoi.split(',')[0];
@@ -123,6 +139,11 @@ function getLocalPreview(newRoi){
 // image_archive/urn_cite2_hmt_vaimg.v1_/VA012RN_0013.jpg
 }
 
+/**
+ * Creates the SRC attribute for the image used in the preview window using
+ * the provided ROI
+ * @param  {string} roi the ROI of this image
+ */
 function getRemotePreview(roi){
 	var plainUrn = imgUrn.split("@")[0];
 	var imgId = plainUrn.split(":")[4];
@@ -135,7 +156,9 @@ function getRemotePreview(roi){
 
 
 
-/* Main */
+/**
+ * Main entry point of the program.
+ */
 jQuery(function($){
 
 	var paramUrn = get("urn");
@@ -224,9 +247,12 @@ function initOpenSeadragon() {
 
 }
 
-
-
-
+/**
+ * Called after Openseadragon has initialized (currently set to two seconds
+ * magic interval). Loads the default image. This method is also Called
+ * when the user presses the Change Image button.
+ * @param  {string} imgUrn the urn of the default image
+ */
 function loadDefaultROI(imgUrn){
 	tempArray = roiArray;
 	roiArray = []
@@ -257,7 +283,8 @@ function loadDefaultROI(imgUrn){
 	}
 
 	/*
-	if (imgUrn.split("@").length > 1){
+  CAN BE REMOVED?
+  if (imgUrn.split("@").length > 1){
 		var newRoi = imgUrn.split("@")[1];
 		var newGroup = getGroup(roiArray.length+1);
 		var roiObj = {index: roiArray.length, roi: newRoi, mappedUrn: imgUrn, group: newGroup.toString()};
@@ -268,9 +295,10 @@ function loadDefaultROI(imgUrn){
 	*/
 }
 
-
-
-
+/**
+ * Creates a ROI from the selection rect created by Openseadragon.
+ * @param  {Rectangle} rect rectangular object (the selection)
+ */
 function createROI(rect){
 	var newRoi = rectToRoi(rect);
 	var newUrn = imgUrn + "@" + newRoi;
@@ -282,6 +310,11 @@ function createROI(rect){
 	updateShareUrl();
 }
 
+/**
+ * Converts a rectangle object into a ROI we can use in a URN
+ * @param  {Rectangle} rect a rectangle object.
+ * @return {string}   a string that describes the rectangle in percentages
+ */
 function rectToRoi(rect){
 	var normH = viewer.world.getItemAt(0).getBounds().height;
 	var normW = viewer.world.getItemAt(0).getBounds().width;
@@ -294,8 +327,11 @@ function rectToRoi(rect){
 	return newRoi;
 }
 
-
-
+/**
+ * Adds a listing to the preview panel using the provided ROI object
+ * that contains all the data.
+ * @param {Object} roiObj Contains all the necessary data to construct the listing
+ */
 function addRoiListing(roiObj){
 		// image_urnList
 		var idForListing = idForMappedUrn(roiObj.index);
@@ -354,9 +390,10 @@ function addRoiListing(roiObj){
 		});
 }
 
-
-
-
+/**
+ * Removes the ROI specified by the parameter from the list of saved URNS
+ * @param  {int} c index of the removed ROI
+ */
 function deleteRoi(c){
 	var tempArray = []
 	for (i = 0; i < roiArray.length; i++){
@@ -375,8 +412,9 @@ function deleteRoi(c){
 	updateShareUrl();
 }
 
-
-
+/**
+ * Removes all ROI overlays and adds them immediately afterwards
+ */
 function refreshRois(){
 	var tempArray = [];
 	for (i = 0; i < roiArray.length; i++){
@@ -392,10 +430,12 @@ function refreshRois(){
 	}
 }
 
-
-
-
-//get request parameter
+/**
+ * Returns a URL parameter with the provided name and parses it into the ROI
+ * array
+ * @param  {string} name the name of the URL parameter
+ * @return the value of the URL parameter
+ */
 function get(name){
 	if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
 
@@ -415,12 +455,13 @@ function get(name){
 	} else {
 		return undefined;
 	}
-
 }
 
-
-
-
+/**
+ * Adds a new ROI overlay using the provided ROI object
+ * @param {Object} roiObj   the object that contains the data needed to create
+ *                          the overlay for this ROI
+ */
 function addRoiOverlay(roiObj){
 	var normH = viewer.world.getItemAt(0).getBounds().height;
 	var normW = viewer.world.getItemAt(0).getBounds().width;
@@ -454,9 +495,9 @@ function addRoiOverlay(roiObj){
 	});
 }
 
-
-
-
+/**
+ * Removes all the Highlights from the site
+ */
 function removeAllHighlights(){
 	 	for (i = 0; i < roiArray.length; i++){
 			var liId = idForMappedUrn(i)
@@ -466,9 +507,9 @@ function removeAllHighlights(){
 		}
 }
 
-
-
-
+/**
+ * Clears all the ROI from the Array and empties the preview window
+ */
 function clearJsRoiArray() {
 	for (i = 0; i < roiArray.length; i++){
 		var tid = "image_mappedROI_" + i
@@ -478,54 +519,76 @@ function clearJsRoiArray() {
 	roiArray = [];
 	$("#image_urnList").empty();
 	$("#image_preview").attr("src","");
-
 }
 
+/**
+ * Returns the URN with ID for the specific index
+ * @param  {int} i ROI index
+ * @return {string}   URN with ID
+ */
 function idForMappedUrn(i) {
 	var s = "image_mappedUrn_" + (i)
 	return s
 }
 
+/**
+ * Returns the ROI with ID for the specific index
+ * @param  {int} i ROI index
+ * @return {string}   ROI with ID
+ */
 function idForMappedROI(i) {
 	var s = "image_mappedROI_" + (i)
 	return s
 }
 
+/**
+ * Converts a ROI with id to URN with id
+ * @param  {string} id ROI with ID
+ * @return {string}    URN with ID
+ */
 function roiToUrnId(id) {
 	var s = id.replace("image_mappedROI_","image_mappedUrn_")
 	return s
 }
 
+/**
+ * Converts a URN with id to ROI with id
+ * @param  {string} id URN with ID
+ * @return {string}    ROI with ID
+ */
 function urnToRoiId(id) {
 	var s = id.replace("image_mappedUrn_","image_mappedROI_")
 	return s
 }
 
-
-
-
+/**
+ * Normalizes the index of the ROI to a number within the given amount of
+ * colors. E.g. If there were only two colors, an index of 4 would return group
+ * number 0 => (index % colorLength)
+ * @param  {int} i index number
+ * @return {int} normalized group number
+ */
 function getGroup(i){
 	var colorArray = ["#f23568", "#6d38ff", "#38ffd7", "#fff238", "#661641", "#275fb3", "#24a669", "#a67b24", "#ff38a2", "#194973", "#35f268", "#7f441c", "#801c79", "#2a8ebf", "#216616", "#d97330", "#da32e6", "#196d73", "#bdff38", "#bf3e2a", "#3d1973", "#30cdd9", "#858c1f", "#661616"	];
-	//var colorArray = ["#f23568", "#6d38ff", "#38ffd7", "#fff238"];
 	var limit = colorArray.length
-	//var limit = 4;
-	rv = i % limit;
+  var rv = i % limit;
 	return rv;
 }
 
-
-
-
+/**
+ * Reloads the Image by clearing all ROI and
+ * reinitializing OpenSeadragon
+ */
 function reloadImage(){
 	clearJsRoiArray();
 	initOpenSeadragon();
 }
 
-
-
-
+/**
+ * Creates all Event handlers using JQuery and sets
+ * the initial state of the UI on document load
+ */
 function setUpUI() {
-
 	$("div#serverConfigs").hide()
 	$("div#localConfigs").show()
 	$("#browse_onoffswitch").prop("checked",true)
@@ -540,7 +603,7 @@ function setUpUI() {
       reloadImage();
 	});
 
-
+  //Handlers for all the configuration fields
 	$("input#image_serverUrlBox").change(function(){
 			serviceUrl = $(this).prop("value");
       serviceUrlAndPath = serviceUrl + defaultServiceZoomService + servicePath
@@ -560,23 +623,25 @@ function setUpUI() {
 			usePath = localPath;
 	});
 
+  //set the value of the image_urnBox to the imgUrn value
 	$("input#image_urnBox").prop("value",imgUrn)
 
   // Make sure we're starting correctly
-			if ( $("#browse_onoffswitch").prop("checked") ){
-				useLocal = false
-				usePath = serviceUrlAndPath
-				useSuffix = servicePostfix
-				$("div#serverConfigs").show()
-				$("div#localConfigs").hide()
-			} else {
-				useLocal = true
-				usePath = localPath
-				useSuffix = localSuffix
-				$("div#serverConfigs").hide()
-				$("div#localConfigs").show()
-			}
+	if ( $("#browse_onoffswitch").prop("checked") ){
+		useLocal = false
+		usePath = serviceUrlAndPath
+		useSuffix = servicePostfix
+		$("div#serverConfigs").show()
+		$("div#localConfigs").hide()
+	} else {
+		useLocal = true
+		usePath = localPath
+		useSuffix = localSuffix
+		$("div#serverConfigs").hide()
+		$("div#localConfigs").show()
+	}
 
+  //Handler for the remote/local switch
 	$("#browse_onoffswitch").on("click", function(){
 			if ( $(this).prop("checked") ){
 				useLocal = false
@@ -593,9 +658,14 @@ function setUpUI() {
 				$("div#localConfigs").show()
 				reloadImage()
 			}
-	} );
+	});
 }
 
+/**
+ * Returns an Image Path from the given URN.
+ * @param  {string} urn the urn to analyse
+ * @return {string}     the Image Path
+ */
 function getImagePathFromUrn(urn){
 	var ns  = urn.split(":")[2];
 	var collectionAndVersion = urn.split(":")[3];
@@ -605,6 +675,11 @@ function getImagePathFromUrn(urn){
 	return tempPath
 }
 
+/**
+ * Returns the Tilesource for the given Image URN
+ * @param  {string} imgUrn the URN of the Image
+ * @return {string}       the URL of the TileSource
+ */
 function getTileSources(imgUrn){
 	var plainUrn = imgUrn.split("@")[0]
 	var imgId = plainUrn.split(":")[4]
