@@ -529,6 +529,7 @@ function setUpUI() {
 	$("button#image_changeUrn").on("click", function(){
 			var newUrn = $("input#image_urnBox").prop("value").trim()
 			imgUrn = newUrn
+			updateShareUrl();
 			reloadImage();
 	});
 
