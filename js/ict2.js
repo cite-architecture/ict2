@@ -1,4 +1,4 @@
-/* efaults and Globals */
+/* Defaults and Globals */
 
 var viewer = null
 
@@ -10,6 +10,7 @@ var defaultServiceSuffix = ".tif"
 var defaultServiceZoomPostfix = ".dzi"
 var defaultLocalpath = "image_archive/"
 var defaultThumbWidth = 250;
+var defaultFullWidth = 5000;
 
 
 //var defaultLocalpath = "image_archive/"
@@ -46,6 +47,7 @@ function toggleSidebar(){
 /**
  * Draws a preview. Does not seem to be used anymore. DEPRECATED?
  */
+ /*
 function ict2_drawPreview(osr){
 	  var newRoi = rectToRoi(osr)
 		if (useLocal){
@@ -54,6 +56,7 @@ function ict2_drawPreview(osr){
 			getRemotePreview(newRoi)
 		}
 }
+*/
 
 /**
  * Distributes the drawing of the preview image to the right function
@@ -74,15 +77,11 @@ function ict2_drawPreviewFromUrn(urn){
  * @return {[type]} [description]
  */
 function updateShareUrl(){
-			console.log("updating url");
 			var thisUrl = window.location.href.split("?")[0];
 			var theseUrns = "";
 			var shareUrl = "";
-			console.log(thisUrl);
 			if (imgUrn == "") {
-					console.log("empty urn");
 			} else {
-				  console.log(imgUrn);
 					if (roiArray.length > 0){
 						roiArray.forEach( function(r){
 							if (theseUrns == ""){
@@ -90,16 +89,13 @@ function updateShareUrl(){
 							} else {
 								theseUrns += "&";
 							}
-							console.log("roi: " + r.roi);
 							theseUrns += "urn=" + imgUrn + "@" + r.roi;
 						});
 					} else {
-						console.log("empty roi");
 						theseUrns += "?urn=" + imgUrn;
 					}
 			}
 			shareUrl = thisUrl + theseUrns;
-			console.log(shareUrl);
 			$("a#ict_shareUrl").attr("href", shareUrl);
 			$("a#ict_shareUrl").text("Link to Current State")
 }
@@ -149,7 +145,11 @@ function getRemotePreview(roi){
 	var imgId = plainUrn.split(":")[4];
 	var tempImagePath = getImagePathFromUrn(plainUrn);
 	// here
-	var u = serviceUrl + "OBJ=IIP,1.0&FIF=" + servicePath + tempImagePath + imgId + serviceSuffix;
+	var linkUrl = serviceUrl + "OBJ=IIP,1.0&FIF=" + servicePath + tempImagePath + imgId + serviceSuffix;
+	linkUrl += "&RGN=" + roi + "&wID=" + defaultFullWidth + "&CVT=JPEG";
+
+	$("#full_image_link").attr("href",linkUrl);	
+	var u = serviceUrl + "OBJ=IIP,1.0&FIF=" + servicePath + tempImagePath + imgId + serviceSuffix; 
 	u += "&RGN=" + roi + "&wID=" + defaultThumbWidth + "&CVT=JPEG";
 	$("#image_preview").attr("src",u);
 }
@@ -170,7 +170,8 @@ jQuery(function($){
 	} else {
 		imgUrn = paramUrn;
 	}
-	updateShareUrl();
+//	console.log("calling updateShare from jQuery")
+//	updateShareUrl();
 
 	setUpUI()
 
@@ -254,7 +255,7 @@ function initOpenSeadragon() {
  * @param  {string} imgUrn the urn of the default image
  */
 function loadDefaultROI(imgUrn){
-	tempArray = roiArray;
+	tempArray = [];
 	roiArray = []
 
   //check if the value of imgUrn has a ROI already included
@@ -266,7 +267,6 @@ function loadDefaultROI(imgUrn){
 
 	if (tempArray.length > 0){
 		tempArray.forEach(function(i){
-			console.log(i);
 			var newRoi = i;
 			var newGroup = getGroup(roiArray.length+1);
 			var newUrn = imgUrn.split("@")[0] + "@" + i;
@@ -282,17 +282,6 @@ function loadDefaultROI(imgUrn){
 		updateShareUrl();
 	}
 
-	/*
-  CAN BE REMOVED?
-  if (imgUrn.split("@").length > 1){
-		var newRoi = imgUrn.split("@")[1];
-		var newGroup = getGroup(roiArray.length+1);
-		var roiObj = {index: roiArray.length, roi: newRoi, mappedUrn: imgUrn, group: newGroup.toString()};
-		roiArray.push(roiObj);
-		addRoiOverlay(roiObj);
-		addRoiListing(roiObj);
-	}
-	*/
 }
 
 /**
