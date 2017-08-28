@@ -31,6 +31,7 @@ var usePath = localPath;
 var useSuffix = localSuffix;
 
 var useLocal = false;
+var initialLoadDone = false;
 
 var imgUrn = "urn:cite2:hmt:vaimg.2017a:VA012RN_0013@0.208,0.2087,0.086,0.0225"
 var defaultUrn = "urn:cite2:hmt:vaimg.2017a:VA012RN_0013"
@@ -98,6 +99,9 @@ function updateShareUrl(){
 			shareUrl = thisUrl + theseUrns;
 			$("a#ict_shareUrl").attr("href", shareUrl);
 			$("a#ict_shareUrl").text("Link to Current State")
+
+      //only update the urlbar if the initial load is done
+      if(initialLoadDone) history.pushState(null, '', theseUrns);
 }
 
 /**
@@ -148,8 +152,8 @@ function getRemotePreview(roi){
 	var linkUrl = serviceUrl + "OBJ=IIP,1.0&FIF=" + servicePath + tempImagePath + imgId + serviceSuffix;
 	linkUrl += "&RGN=" + roi + "&wID=" + defaultFullWidth + "&CVT=JPEG";
 
-	$("#full_image_link").attr("href",linkUrl);	
-	var u = serviceUrl + "OBJ=IIP,1.0&FIF=" + servicePath + tempImagePath + imgId + serviceSuffix; 
+	$("#full_image_link").attr("href",linkUrl);
+	var u = serviceUrl + "OBJ=IIP,1.0&FIF=" + servicePath + tempImagePath + imgId + serviceSuffix;
 	u += "&RGN=" + roi + "&wID=" + defaultThumbWidth + "&CVT=JPEG";
 	$("#image_preview").attr("src",u);
 }
@@ -183,6 +187,7 @@ jQuery(function($){
 
 /* Initiatlize OpenSeadragon viewer with guides, selection, and pre-load any urn */
 function initOpenSeadragon() {
+  initialLoadDone = false;
 
 		if (viewer != null){
 				viewer.destroy();
@@ -244,6 +249,7 @@ function initOpenSeadragon() {
 	// Openseadragon does not have a ready() function, so here we are…
 	setTimeout(function(){
 			loadDefaultROI(imgUrn);
+      initialLoadDone = true;
 	},2000);
 
 }
