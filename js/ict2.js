@@ -261,16 +261,9 @@ function initOpenSeadragon() {
  * @param  {string} imgUrn the urn of the default image
  */
 function loadDefaultROI(imgUrn){
-	tempArray = [];
+	tempArray = roiArray;
 	roiArray = []
-
-  //check if the value of imgUrn has a ROI already included
-  if(imgUrn.indexOf('@') > -1){
-    var includedROI = imgUrn.split('@')[1];
-    //if there was an ROI included, add it to the saved URNS
-    tempArray.push(includedROI);
-  }
-
+	
 	if (tempArray.length > 0){
 		tempArray.forEach(function(i){
 			var newRoi = i;
