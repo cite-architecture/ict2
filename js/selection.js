@@ -377,7 +377,7 @@
             real.rotation = result.rotation;
             result = real;
         }
-				ict2_drawPreview(result)
+				//ict2_drawPreview(result)
     }
 
     function onClick() {
@@ -406,7 +406,7 @@
             real.rotation = result.rotation;
             result = real;
         }
-				ict2_drawPreview(result)
+				//ict2_drawPreview(result)
     }
 
 		function onBorderDragEnd() {
@@ -417,7 +417,7 @@
             real.rotation = result.rotation;
             result = real;
         }
-				ict2_drawPreview(result)
+				//ict2_drawPreview(result)
 		}
 
     function onBorderDrag(border, e) {
