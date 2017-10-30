@@ -90,7 +90,8 @@ function updateShareUrl(){
 							} else {
 								theseUrns += "&";
 							}
-							theseUrns += "urn=" + imgUrn + "@" + r.roi;
+							//theseUrns += "urn=" + imgUrn + "@" + r.roi;
+							theseUrns += "urn=" + r.mappedUrn;
 						});
 					} else {
 						theseUrns += "?urn=" + imgUrn;
@@ -101,7 +102,9 @@ function updateShareUrl(){
 			$("a#ict_shareUrl").text("Link to Current State")
 
       //only update the urlbar if the initial load is done
-      if(initialLoadDone) history.pushState(null, '', theseUrns);
+      if(initialLoadDone){
+	       history.pushState(null, '', theseUrns);
+	    }
 }
 
 /**
@@ -289,7 +292,8 @@ function loadDefaultROI(imgUrn){
  */
 function createROI(rect){
 	var newRoi = rectToRoi(rect);
-	var newUrn = imgUrn + "@" + newRoi;
+	var newUrnStripped = imgUrn.split("@")[0]
+	var newUrn = newUrnStripped + "@" + newRoi;
 	var newGroup = getGroup(roiArray.length+1);
 	var roiObj = {index: roiArray.length, roi: newRoi, mappedUrn: newUrn, group: newGroup.toString()};
 	roiArray.push(roiObj);
@@ -613,7 +617,8 @@ function setUpUI() {
 	});
 
   //set the value of the image_urnBox to the imgUrn value
-	$("input#image_urnBox").prop("value",imgUrn)
+
+	$("input#image_urnBox").prop("value",imgUrn.split("@")[0])
 
   // Make sure we're starting correctly
 	if ( $("#browse_onoffswitch").prop("checked") ){
