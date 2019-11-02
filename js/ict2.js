@@ -2,8 +2,8 @@
 
 var viewer = null
 
-// "http://www.homermultitext.org/iipsrv?DeepZoom=/project/homer/pyramidal/VenA/"
-var defaultServiceUrl = "http://www.homermultitext.org/iipsrv?"
+// "https://www.homermultitext.org/iipsrv?DeepZoom=/project/homer/pyramidal/VenA/"
+var defaultServiceUrl = "https://www.homermultitext.org/iipsrv?"
 var defaultServiceZoomService = "DeepZoom="
 var defaultServicePath = "/project/homer/pyramidal/deepzoom/"
 var defaultServiceSuffix = ".tif"
@@ -203,7 +203,7 @@ function initOpenSeadragon() {
 		crossOriginPolicy: "Anonymous",
 		defaultZoomLevel: 1,
 		tileSources: getTileSources(imgUrn),
-		// tileSources: 'http://www.homermultitext.org/iipsrv?DeepZoom=/project/homer/pyramidal/VenA/VA012RN_0013.tif.dzi',
+		// tileSources: 'https://www.homermultitext.org/iipsrv?DeepZoom=/project/homer/pyramidal/VenA/VA012RN_0013.tif.dzi',
 		minZoomImageRatio: 0.1, // of viewer size
 		immediateRender: true
 	});
