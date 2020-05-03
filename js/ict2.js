@@ -583,7 +583,7 @@ function reloadImage(){
 function setUpUI() {
 	$("div#serverConfigs").hide()
 	$("div#localConfigs").show()
-	$("#browse_onoffswitch").prop("checked",true)
+	$("#browse_onoffswitch").prop("checked",useRemoteByDefault)
 	$("input#image_serverUrlBox").prop("value",serviceUrl)
 	$("input#image_serverUrlPathBox").prop("value",servicePath)
 	//$("input#image_serverSuffixBox").prop("value",serviceSuffix)
@@ -619,6 +619,8 @@ function setUpUI() {
   //set the value of the image_urnBox to the imgUrn value
 
 	$("input#image_urnBox").prop("value",imgUrn.split("@")[0])
+
+	console.log($("#browse_onoffswitch").prop("checked"));
 
   // Make sure we're starting correctly
 	if ( $("#browse_onoffswitch").prop("checked") ){
